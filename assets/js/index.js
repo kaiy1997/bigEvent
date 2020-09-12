@@ -8,11 +8,11 @@ $(function () {
             url: '/my/userinfo',
             success: function (res) {
                 if (res.status !== 0) {
-                    layer.msg(res.message)
+                    return layer.msg(res.message)
                 }
                 // 渲染用户头像和名称
                 reandTouxiang(res.data)
-            }
+            },
         })
     }
 
@@ -37,14 +37,14 @@ $(function () {
 
     // 退出功能
     $('.logoutBtn').click(function () {
-        layer.confirm('是否确认退出登录?', {icon: 3, title:'提示'}, function(index){
+        layer.confirm('是否确认退出登录?', { icon: 3, title: '提示' }, function (index) {
             // 清空本地存储的token
             localStorage.removeItem('token')
             // 返回登录页面
             location.href = '/login.html'
             // 关闭询问框
             layer.close(index);
-          });
+        });
     })
 
 })
