@@ -12,6 +12,7 @@ $(function () {
                 }
                 // 渲染用户头像和名称
                 reandTouxiang(res.data)
+                
             },
         })
     }

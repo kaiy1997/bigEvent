@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>修改头像</title>
+  <link rel="stylesheet" href="/assets/lib/layui/css/layui.css">
+  <link rel="stylesheet" href="/assets/lib/cropper/cropper.css" />
+  <link rel="stylesheet" href="/assets/css/user/user_info.css">
+  <style>
+    /* 设置卡片主体区域的宽度 */
+    .layui-card-body {
+      width: 500px;
+    }
+
+    /* 设置按钮行的样式 */
+    .row2 {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
+    }
+
+    /* 设置裁剪区域的样式 */
+    .cropper-box {
+      width: 350px;
+      height: 350px;
+      background-color: cyan;
+      overflow: hidden;
+    }
+
+    /* 设置第一个预览区域的样式 */
+    .w100 {
+      width: 100px;
+      height: 100px;
+      background-color: gray;
+    }
+
+    /* 设置第二个预览区域的样式 */
+    .w50 {
+      width: 50px;
+      height: 50px;
+      background-color: gray;
+      margin-top: 50px;
+    }
+
+    /* 设置预览区域下方文本的样式 */
+    .size {
+      font-size: 12px;
+      color: gray;
+      text-align: center;
+    }
+
+    /* 设置图片行的样式 */
+    .row1 {
+      display: flex;
+    }
+
+    /* 设置 preview-box 区域的的样式 */
+    .preview-box {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      align-items: center;
+    }
+
+    /* 设置 img-preview 区域的样式 */
+    .img-preview {
+      overflow: hidden;
+      border-radius: 50%;
+    }
+    #file {
+      display: none;
+    }
+  </style> 
+</head>
+
+<body>
+  <div class="layui-card">
+    <div class="layui-card-header">更换头像</div>
+    <div class="layui-card-body">
+      <!-- 第一行的图片裁剪和预览区域 -->
+      <div class="row1">
+        <!-- 图片裁剪区域 -->
+        <div class="cropper-box">
+          <!-- 这个 img 标签很重要，将来会把它初始化为裁剪区域 -->
+          <img id="image" src="/assets/images/sample.jpg" />
+        </div>
+        <!-- 图片的预览区域 -->
+        <div class="preview-box">
+          <div>
+            <!-- 宽高为 100px 的预览区域 -->
+            <div class="img-preview w100"></div>
+            <p class="size">100 x 100</p>
+          </div>
+          <div>
+            <!-- 宽高为 50px 的预览区域 -->
+            <div class="img-preview w50"></div>
+            <p class="size">50 x 50</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第二行的按钮区域 -->
+      <div class="row2">
+        <input type="file" id="file" accept="image/png,image/jpeg">
+        <button type="button" class="layui-btn" id="uploadImg">
+          <i class="layui-icon">&#xe67c;</i>上传图片
+        </button>
+        <button type="button" class="layui-btn layui-btn-danger" id="sureBtn">确定</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/assets/lib/jquery.js"></script>
+  <script src="/assets/lib/layui/layui.all.js"></script>
+  <script src="/assets/lib/cropper/Cropper.js"></script>
+  <script src="/assets/lib/cropper/jquery-cropper.js"></script>
+  <script src="/assets/js/baseAPI.js"></script>
+  <script src="/assets/js/user/user_photo.js"></script>
+</body>
+
+</html>
