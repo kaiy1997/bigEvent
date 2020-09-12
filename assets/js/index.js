@@ -1,9 +1,9 @@
 $(function () {
 
     var layer = layui.layer
-    user()
+    getUser()
     // 获取用户基本信息
-    function user() {
+    function getUser() {
         $.ajax({
             url: '/my/userinfo',
             success: function (res) {
@@ -15,7 +15,7 @@ $(function () {
             },
         })
     }
-
+    window.getUser = getUser
     //渲染用户头像和名称
     function reandTouxiang(data) {
         // 渲染用户名
