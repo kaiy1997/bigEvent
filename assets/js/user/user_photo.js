@@ -53,6 +53,10 @@ $(function () {
         avatar: dataURL
       },
       success: function (res) {
+        if (res.status !== 0) {
+          return layui.layer.msg(res.message)
+        }
+        layui.layer.msg('头像更换成功！')
         // 重新渲染页面头像
         top.window.parent.getUser()
       }
