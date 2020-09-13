@@ -1,0 +1,16 @@
+body,html {
+  padding: 0;
+  margin: 0;
+}
+body {
+  padding: 15px;
+  background-color: #f2f3f5;
+}
+.layui-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#addForm {
+  padding: 20px 30px 0 0;
+}
