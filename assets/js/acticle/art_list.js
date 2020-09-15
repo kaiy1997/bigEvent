@@ -1,7 +1,6 @@
 $(function () {
   var form = layui.form
   var layer = layui.layer
-  var total = 0 // 数据总数
   var q = {
     pagenum: 1, // 页码值
     pagesize: 2, // 每页显示的数据
@@ -21,11 +20,10 @@ $(function () {
           return layer.msg(res.message)
         }
         // 数据总数
-        total = res.total
         var tr = template('tpl_tr', res)
         $('tbody').html(tr)
         // 渲染分页
-        xrpage()
+        xrpage(res.total)
       }
     })
 
@@ -37,7 +35,6 @@ $(function () {
     $.ajax({
       method: 'GET',
       url: '/my/article/cates',
-      // data: q,
       success: function (res) {
         if (res.status !== 0) {
           return layer.msg(res.message)
@@ -61,21 +58,21 @@ $(function () {
   })
 
   // 分页 
-  function xrpage() {
+  function xrpage(total) {
     layui.use('laypage', function () {
       var laypage = layui.laypage;
       //执行一个laypage实例
       laypage.render({
-        elem: 'test1',
+        elem: 'test1', // 分页盒子
         count: total, // 数据总数
         limit: q.pagesize, // 每页显示的数据
         limits: [2, 3, 5, 10],//数据总数，从服务端得到
         curr: q.pagenum, // 页码值
-        layout: ['count', 'limit', 'prev', 'page', 'next', 'skip'],
+        layout: ['count', 'limit', 'prev', 'page', 'next', 'skip'], // 分页布局
         jump: function (obj, first) {
-          q.pagenum = obj.curr
-          q.pagesize = obj.limit
-          //首次不执行
+          q.pagenum = obj.curr  // 获取最新的页码值
+          q.pagesize = obj.limit // 获取每页显示的数据
+          //页面初始化不执行
           if (!first) {
             xrArt()
           }
@@ -88,6 +85,9 @@ $(function () {
   $('body').on('click', '#removeBtn', function () {
     // 文章的Id
     var removeId = $(this).attr('removeId')
+    // 当前页文章的数量
+    var len = $('#removeBtn').length
+
     layer.confirm('确认删除文章?', function (index) {
       $.ajax({
         method: 'GET',
@@ -97,6 +97,11 @@ $(function () {
             return layer.msg(res.message)
           }
           layer.msg(res.message)
+
+          // 当文章的数量为1且页码值不等于1时，页码值减1
+          if (len === 1) {
+            q.pagenum = q.pagenum === 1 ? 1 : q.pagenum - 1
+          }
           xrArt()
         }
       })
